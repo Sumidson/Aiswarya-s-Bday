@@ -19,6 +19,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Animated Gradient - Active by default on ALL pages */
             background: linear-gradient(300deg, #E0F7FA, #81D4FA, #4FC3F7, #00b4db);
             background-size: 240% 240%;
             animation: gradientShift 20s ease infinite;
@@ -29,16 +30,18 @@
             padding: 10px;
             position: relative;
             overflow-x: hidden;
-            transition: background 0.5s ease; /* Smooth transition when background changes */
+            transition: background 0.5s ease;
         }
 
-        /* --- NEW: STATIC MODE CLASS (Activates for Special Corner) --- */
+        /* --- STATIC MODE (Only for Special Corner) --- */
+        /* This class is added via JS only when the Special Corner opens */
         body.static-mode {
             animation: none !important;
             background: linear-gradient(135deg, #81D4FA, #4FC3F7) !important;
             background-attachment: fixed !important;
         }
 
+        /* Hide bubbles and decor ONLY in static mode */
         body.static-mode .bg-bubbles, 
         body.static-mode .corner-decor {
             display: none !important;
@@ -74,6 +77,7 @@
             border-radius: 50%;
         }
 
+        /* Bubble Positioning */
         .bg-bubbles li:nth-child(1) { left: 10%; }
         .bg-bubbles li:nth-child(2) { left: 20%; width: 80px; height: 80px; animation-delay: 2s; animation-duration: 20s; }
         .bg-bubbles li:nth-child(3) { left: 25%; animation-delay: 4s; }
@@ -103,6 +107,7 @@
         /* --- CONTAINER --- */
         .container {
             background: rgba(255, 255, 255, 0.95);
+            /* Frosted glass removed on mobile via media query below to fix lag */
             backdrop-filter: blur(10px); 
             border-radius: 25px;
             padding: 40px;
@@ -115,7 +120,7 @@
             z-index: 10;
         }
 
-        /* --- ANIMATION LOGIC (DESKTOP ONLY) --- */
+        /* --- ENTRANCE ANIMATIONS (DESKTOP) --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translate3d(0, 30px, 0); }
             to { opacity: 1; transform: translate3d(0, 0, 0); }
@@ -136,7 +141,7 @@
         .welcome-page { display: block; }
         .riddle-page, .riddle-page-2, .video-page, .special-corner-page, .message-page { display: none; }
 
-        /* --- STYLES --- */
+        /* --- ELEMENT STYLES --- */
         .birthday-banner {
             background: linear-gradient(135deg, #21D4FD 0%, #2152FF 100%);
             color: white;
@@ -150,13 +155,7 @@
         .birthday-title { color: #01579B; font-size: 2em; font-weight: 800; margin: 20px 0; }
         
         .countdown-timer { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-        .time-box { 
-            background: #F0F8FF;
-            border-radius: 15px; 
-            padding: 15px; 
-            min-width: 80px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
+        .time-box { background: #F0F8FF; border-radius: 15px; padding: 15px; min-width: 80px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .time-number { font-size: 1.8em; font-weight: 800; color: #0288D1; }
         .time-label { font-size: 0.8em; color: #01579B; font-weight: 600; margin-top: 5px; }
         
@@ -177,7 +176,6 @@
             position: relative;
             display: inline-block;
         }
-
         .press-button:active, .submit-btn:active { transform: scale(0.95); }
         .press-button { padding: 20px 50px; font-size: 1.3em; margin-top: 20px; animation: pulse 2s infinite; }
         
@@ -246,32 +244,25 @@
         .hearts { text-align: center; font-size: 3em; margin-top: 30px; animation: heartbeat 2s infinite ease-in-out; color: #21D4FD; }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        /* --- MOBILE REPAIRS --- */
+        /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 600px) {
-            body { 
-                padding: 0; 
-                animation: none; 
-                background: linear-gradient(135deg, #81D4FA, #4FC3F7);
-                background-attachment: fixed;
-            }
-            
+            /* We KEEP animations generally, but remove blur to stop lag */
             .container { 
                 width: 100%; 
                 min-height: 100vh;
                 border-radius: 0; 
                 padding: 25px; 
                 box-shadow: none;
-                backdrop-filter: none;
+                backdrop-filter: none; /* KEY FIX FOR LAG */
                 background: rgba(255, 255, 255, 0.98);
             }
 
+            /* Force elements to be visible instantly on mobile to avoid "missing button" issues */
             .stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5 {
                 opacity: 1 !important;
                 animation: none !important;
                 transform: none !important;
             }
-
-            .bg-bubbles li:nth-child(even) { display: none; }
 
             .questions-container { height: auto; background: transparent; }
             .question-item { min-height: 70px; flex: none; width: 100%; margin-bottom: 10px; }
@@ -501,7 +492,13 @@
 
         function goToRiddle() { transitionToPage('welcomePage', 'riddlePage'); }
         function goToRiddle2() { transitionToPage('videoPage', 'riddlePage2'); }
-        function goToMessage() { transitionToPage('specialCornerPage', 'messagePage'); }
+        
+        // MODIFIED FOR STATIC MODE LOGIC
+        function goToMessage() { 
+            // Turn Animation BACK ON when leaving special corner
+            document.body.classList.remove('static-mode');
+            transitionToPage('specialCornerPage', 'messagePage'); 
+        }
 
 
         // --- ANSWERS ---
@@ -519,7 +516,9 @@
                 video.addEventListener('ended', function() {
                     const nextBtn = document.getElementById('nextRiddleBtn');
                     nextBtn.style.display = 'inline-block';
-                    // Animation handled by CSS class for desktop, instant for mobile
+                    if (window.innerWidth > 600) {
+                       nextBtn.style.animation = 'fadeInUp 0.8s var(--smooth-ease) forwards';
+                    }
                 });
             } else {
                 inputField.classList.add('shake');
@@ -544,7 +543,7 @@
             const error2Message = document.getElementById('error2Message');
             
             if (userAnswer === 'oii') {
-                // Activate static mode on body
+                // TURN OFF ANIMATION FOR SPECIAL CORNER
                 document.body.classList.add('static-mode');
                 transitionToPage('riddlePage2', 'specialCornerPage');
             } else {
