@@ -5,17 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday Kochee!</title>
     <style>
-        /* --- PERFORMANCE VARIABLES --- */
+        /* --- CORE VARIABLES --- */
         :root {
-            --smooth-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slightly faster for mobile */
-            --bounce-ease: cubic-bezier(0.34, 1.56, 0.64, 1); 
+            --smooth-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Prevent highlight on tap for mobile */
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -23,7 +21,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(300deg, #E0F7FA, #81D4FA, #4FC3F7, #00b4db);
             background-size: 240% 240%;
-            /* Animation kept for desktop, removed for mobile via media query below */
             animation: gradientShift 20s ease infinite;
             min-height: 100vh;
             display: flex;
@@ -40,7 +37,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- BACKGROUND BUBBLES --- */
+        /* --- BUBBLES --- */
         .bg-bubbles {
             position: fixed;
             top: 0;
@@ -50,8 +47,6 @@
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
-            /* Hardware Acceleration */
-            transform: translate3d(0, 0, 0);
         }
 
         .bg-bubbles li {
@@ -64,7 +59,6 @@
             bottom: -160px;
             animation: square 25s infinite linear;
             border-radius: 50%;
-            will-change: transform; /* Performance Boost */
         }
 
         .bg-bubbles li:nth-child(1) { left: 10%; }
@@ -85,7 +79,6 @@
             font-size: 2em;
             z-index: 2;
             animation: sway 5s ease-in-out infinite alternate;
-            will-change: transform;
         }
         @keyframes sway {
             0% { transform: rotate(-5deg); }
@@ -94,10 +87,9 @@
         .top-left { top: 15px; left: 15px; }
         .top-right { top: 15px; right: 15px; }
 
-        /* --- MAIN CONTAINER --- */
+        /* --- CONTAINER --- */
         .container {
-            background: rgba(255, 255, 255, 0.92);
-            /* Frosted glass is heavy, we reduce it or remove it on mobile */
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px); 
             border-radius: 25px;
             padding: 40px;
@@ -108,19 +100,18 @@
             text-align: center;
             position: relative;
             z-index: 10;
-            /* Removed container float animation for performance stability */
-            will-change: transform, opacity;
         }
 
-        /* --- ENTRANCE ANIMATIONS --- */
+        /* --- ANIMATION LOGIC (DESKTOP ONLY) --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translate3d(0, 30px, 0); }
             to { opacity: 1; transform: translate3d(0, 0, 0); }
         }
 
+        /* Default state: Elements are HIDDEN waiting for animation */
         .stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5 {
             opacity: 0;
-            animation: fadeInUp 0.6s var(--smooth-ease) forwards;
+            animation: fadeInUp 0.8s var(--smooth-ease) forwards;
         }
 
         .stagger-1 { animation-delay: 0.1s; }
@@ -133,7 +124,7 @@
         .welcome-page { display: block; }
         .riddle-page, .riddle-page-2, .video-page, .special-corner-page, .message-page { display: none; }
 
-        /* --- WELCOME PAGE STYLES --- */
+        /* --- STYLES --- */
         .birthday-banner {
             background: linear-gradient(135deg, #21D4FD 0%, #2152FF 100%);
             color: white;
@@ -152,7 +143,6 @@
             border-radius: 15px; 
             padding: 15px; 
             min-width: 80px; 
-            /* Removed heavy box-shadow transition for mobile */
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         .time-number { font-size: 1.8em; font-weight: 800; color: #0288D1; }
@@ -161,7 +151,6 @@
         .sweet-message { font-size: 1.2em; color: #444; margin: 30px 0; font-style: italic; }
         .warning-message { display: none; font-size: 1.2em; color: #FF5722; margin: 20px 0; font-weight: 600; }
 
-        /* --- BUTTONS --- */
         .press-button, .submit-btn, .riddle-2-submit, .special-corner-button {
             background: linear-gradient(135deg, #21D4FD 0%, #2152FF 100%);
             color: white;
@@ -172,24 +161,20 @@
             cursor: pointer;
             font-weight: 700;
             box-shadow: 0 8px 20px rgba(33, 82, 255, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease;
             position: relative;
             display: inline-block;
-            /* Removed shine effect ::after for performance */
         }
 
         .press-button:active, .submit-btn:active { transform: scale(0.95); }
-
         .press-button { padding: 20px 50px; font-size: 1.3em; margin-top: 20px; animation: pulse 2s infinite; }
         
-        /* Simpler pulse animation */
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
         
-        /* --- INPUTS --- */
         .page-title { color: #01579B; margin-bottom: 20px; font-size: 2.2em; font-weight: 800; }
         .riddle-text { font-size: 1.4em; color: #333; margin-bottom: 30px; line-height: 1.5; font-weight: 500; }
 
@@ -198,22 +183,13 @@
             border: 2px solid #E3F2FD; 
             border-radius: 15px; margin: 25px 0; text-align: center; 
             background: #F0F8FF; 
-            transition: border-color 0.3s ease;
         }
-        .answer-input:focus, .riddle-2-input:focus {
-            background: white; border-color: #21D4FD; 
-            outline: none;
-        }
+        .answer-input:focus, .riddle-2-input:focus { background: white; border-color: #21D4FD; outline: none; }
 
         .shake { animation: shake 0.4s both; border-color: #FF5722 !important; background: #fff5f5; }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
-        }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
         .error-message { color: #D32F2F; margin-top: 15px; display: none; font-weight: 700; font-size: 1.1em; }
 
-        /* --- SPECIAL CORNER (Optimized) --- */
         .top-message { color: #01579B; font-size: 1.5em; margin-bottom: 30px; font-weight: 800; line-height: 1.4; }
         .special-corner-button { width: 100%; display: block; margin: 0 auto 30px auto; max-width: 500px;}
         
@@ -223,7 +199,6 @@
             padding: 10px;
             margin: 20px auto;
             width: 100%;
-            /* Fixed height causes issues on mobile, changed to min-height/auto */
             min-height: 600px;
             display: flex; flex-direction: column; gap: 10px;
         }
@@ -235,22 +210,11 @@
             cursor: pointer;
             position: relative; overflow: hidden;
             flex: 1; display: flex; justify-content: center; align-items: center;
-            /* Optimized transition: only flex and transform */
-            transition: flex 0.5s var(--smooth-ease), background-color 0.3s;
-            will-change: flex;
+            transition: flex 0.5s var(--smooth-ease);
         }
 
-        .question-item.active {
-            flex: 12; 
-            background: linear-gradient(135deg, #EBF7FF 0%, #C3E3FD 100%);
-            border-radius: 18px;
-        }
-
-        .question-text {
-            color: #004ba0; font-size: 1.1em; font-weight: 800;
-            position: absolute; z-index: 5;
-            transition: opacity 0.3s ease;
-        }
+        .question-item.active { flex: 12; background: linear-gradient(135deg, #EBF7FF 0%, #C3E3FD 100%); border-radius: 18px; }
+        .question-text { color: #004ba0; font-size: 1.1em; font-weight: 800; position: absolute; z-index: 5; transition: opacity 0.3s ease; }
         .question-item.active .question-text { opacity: 0; pointer-events: none; }
 
         .hover-content {
@@ -259,81 +223,52 @@
             text-align: center; padding: 20px;
             color: #004ba0; font-weight: 600; z-index: 10;
             opacity: 0;
-            transition: opacity 0.4s ease 0.2s; /* Delayed opacity */
+            transition: opacity 0.4s ease 0.2s;
             width: 100%; height: 100%; overflow-y: auto;
             pointer-events: none;
         }
-
         .question-item.active .hover-content { opacity: 1; pointer-events: auto; }
 
-        /* --- MESSAGE PAGE & VIDEO --- */
         video { width: 100%; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3); }
-        
-        .message-text { 
-            padding: 30px; background: #E3F2FD;
-            border-radius: 20px; border-left: 8px solid #21D4FD; 
-            font-size: 1.3em; line-height: 1.6; color: #003c8f;
-        }
-        
+        .message-text { padding: 30px; background: #E3F2FD; border-radius: 20px; border-left: 8px solid #21D4FD; font-size: 1.3em; line-height: 1.6; color: #003c8f; }
         .hearts { text-align: center; font-size: 3em; margin-top: 30px; animation: heartbeat 2s infinite ease-in-out; color: #21D4FD; }
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        /* --- MOBILE OPTIMIZATIONS (The Fix) --- */
+        /* --- MOBILE REPAIRS (THE CRITICAL FIX) --- */
         @media (max-width: 600px) {
             body { 
                 padding: 0; 
-                /* Stop gradient animation on mobile to save CPU */
                 animation: none; 
                 background: linear-gradient(135deg, #81D4FA, #4FC3F7);
-                background-attachment: fixed; /* Prevents repaint on scroll */
+                background-attachment: fixed;
             }
             
             .container { 
                 width: 100%; 
-                min-height: 100vh; /* Full screen on mobile */
+                min-height: 100vh;
                 border-radius: 0; 
                 padding: 25px; 
                 box-shadow: none;
-                /* Disable backdrop filter on mobile (HUGE performance gain) */
                 backdrop-filter: none;
-                background: rgba(255, 255, 255, 0.96);
+                background: rgba(255, 255, 255, 0.98); /* Opaque background */
             }
 
-            .bg-bubbles li:nth-child(even) { display: none; } /* Reduce bubbles */
-
-            .questions-container {
-                height: auto;
-                background: transparent;
+            /* --- FORCE VISIBILITY ON MOBILE --- */
+            /* This ensures items are NEVER hidden on phone */
+            .stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5 {
+                opacity: 1 !important;
+                animation: none !important;
+                transform: none !important;
             }
 
-            .question-item {
-                min-height: 70px;
-                flex: none; /* Disable flex accordion on mobile to prevent layout thrashing */
-                width: 100%;
-                margin-bottom: 10px;
-            }
+            .bg-bubbles li:nth-child(even) { display: none; }
 
-            .question-item.active {
-                height: auto;
-                min-height: 300px;
-                flex: none;
-            }
+            .questions-container { height: auto; background: transparent; }
+            .question-item { min-height: 70px; flex: none; width: 100%; margin-bottom: 10px; }
+            .question-item.active { height: auto; min-height: 300px; flex: none; }
             
-            .hover-content {
-                position: relative;
-                opacity: 0;
-                display: none;
-                height: auto;
-            }
-            
-            .question-item.active .hover-content {
-                display: block;
-                opacity: 1;
-            }
-            
+            .hover-content { position: relative; opacity: 0; display: none; height: auto; }
+            .question-item.active .hover-content { display: block; opacity: 1; }
             .question-item.active .question-text { display: none; }
             .question-text { position: relative; }
         }
@@ -520,9 +455,12 @@
                     document.getElementById('sweetMessage').style.display = 'none';
                     const warning = document.getElementById('warningMessage');
                     warning.style.display = 'block';
+                    // Animation removed on mobile, so we just set display
                     warning.style.animation = 'none';
-                    warning.offsetHeight; /* trigger reflow */
-                    warning.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
+                    // For desktop only
+                    if (window.innerWidth > 600) {
+                        warning.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
+                    }
                     
                     button.textContent = 'Press me Once More 👉👈';
                     button.style.animation = 'none';
@@ -538,14 +476,14 @@
             const currentPage = document.getElementById(currentId);
             const nextPage = document.getElementById(nextId);
             
+            // Fade out effect
             currentPage.style.opacity = '0';
-            currentPage.style.transform = 'translateY(-20px)';
-            currentPage.style.transition = 'all 0.5s var(--smooth-ease)';
+            currentPage.style.transition = 'opacity 0.5s ease';
 
             setTimeout(() => {
                 currentPage.style.display = 'none';
                 currentPage.style.opacity = '';
-                currentPage.style.transform = '';
+                
                 nextPage.style.display = 'block';
             }, 500);
         }
@@ -570,12 +508,10 @@
                 video.addEventListener('ended', function() {
                     const nextBtn = document.getElementById('nextRiddleBtn');
                     nextBtn.style.display = 'inline-block';
-                    nextBtn.style.animation = 'fadeInUp 0.8s var(--smooth-ease) forwards';
                 });
             } else {
                 inputField.classList.add('shake');
                 errorMessage.style.display = 'block';
-                errorMessage.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
                 setTimeout(() => {
                     inputField.classList.remove('shake');
                     errorMessage.style.display = 'none';
@@ -597,7 +533,6 @@
             } else {
                 inputField.classList.add('shake');
                 error2Message.style.display = 'block';
-                error2Message.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
                 setTimeout(() => {
                     inputField.classList.remove('shake');
                     error2Message.style.display = 'none';
