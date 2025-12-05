@@ -137,59 +137,13 @@
             border-radius: 20px;
             margin-bottom: 25px;
             box-shadow: 0 10px 20px rgba(33, 212, 253, 0.3);
-            animation: bannerGlow 3s ease-in-out infinite alternate;
-        }
-        
-        @keyframes bannerGlow {
-            0% { box-shadow: 0 10px 20px rgba(33, 212, 253, 0.3); }
-            100% { box-shadow: 0 15px 40px rgba(33, 212, 253, 0.6), 0 0 30px rgba(33, 212, 253, 0.4); }
         }
 
-        .birthday-banner h1 { 
-            font-size: 1.6em; 
-            font-weight: 800; 
-            margin: 0;
-            animation: textShimmer 2s ease-in-out infinite;
-        }
-        
-        @keyframes textShimmer {
-            0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-            50% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.6); }
-        }
-        
-        .birthday-title { 
-            color: #01579B; 
-            font-size: 2em; 
-            font-weight: 800; 
-            margin: 20px 0;
-            animation: titleBounce 2s ease-in-out infinite;
-        }
-        
-        @keyframes titleBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        .birthday-banner h1 { font-size: 1.6em; font-weight: 800; margin: 0; }
+        .birthday-title { color: #01579B; font-size: 2em; font-weight: 800; margin: 20px 0; }
         
         .countdown-timer { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-        .time-box { 
-            background: #F0F8FF; 
-            border-radius: 15px; 
-            padding: 15px; 
-            min-width: 80px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        
-        .time-box.animate-float { animation: boxFloat 3s ease-in-out infinite; }
-        .time-box.animate-float:nth-child(1) { animation-delay: 0s; }
-        .time-box.animate-float:nth-child(2) { animation-delay: 0.2s; }
-        .time-box.animate-float:nth-child(3) { animation-delay: 0.4s; }
-        .time-box.animate-float:nth-child(4) { animation-delay: 0.6s; }
-        
-        @keyframes boxFloat {
-            0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-            50% { transform: translateY(-8px) scale(1.05); box-shadow: 0 8px 20px rgba(33, 212, 253, 0.3); }
-        }
-        
+        .time-box { background: #F0F8FF; border-radius: 15px; padding: 15px; min-width: 80px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .time-number { font-size: 1.8em; font-weight: 800; color: #0288D1; }
         .time-label { font-size: 0.8em; color: #01579B; font-weight: 600; margin-top: 5px; }
         
@@ -218,23 +172,12 @@
             cursor: pointer;
             font-weight: 700;
             box-shadow: 0 8px 20px rgba(33, 82, 255, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease;
             position: relative;
             display: inline-block;
         }
-        .press-button:hover, .submit-btn:hover, .riddle-2-submit:hover, .special-corner-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(33, 82, 255, 0.4);
-        }
-        .press-button:active, .submit-btn:active, .riddle-2-submit:active, .special-corner-button:active { 
-            transform: scale(0.95); 
-        }
-        .press-button { 
-            padding: 20px 50px; 
-            font-size: 1.3em; 
-            margin-top: 20px; 
-            animation: pulse 2s infinite; 
-        }
+        .press-button:active, .submit-btn:active { transform: scale(0.95); }
+        .press-button { padding: 20px 50px; font-size: 1.3em; margin-top: 20px; animation: pulse 2s infinite; }
         
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -277,27 +220,10 @@
             cursor: pointer;
             position: relative; overflow: hidden;
             flex: 1; display: flex; justify-content: center; align-items: center;
-            transition: flex 0.5s var(--smooth-ease), transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .question-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(33, 212, 253, 0.4);
+            transition: flex 0.5s var(--smooth-ease);
         }
 
-        .question-item.active { 
-            flex: 12; 
-            background: linear-gradient(135deg, #EBF7FF 0%, #C3E3FD 100%); 
-            border-radius: 18px;
-            animation: expandPulse 0.5s ease-out;
-        }
-        
-        @keyframes expandPulse {
-            0% { transform: scale(0.95); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-        
+        .question-item.active { flex: 12; background: linear-gradient(135deg, #EBF7FF 0%, #C3E3FD 100%); border-radius: 18px; }
         .question-text { color: #004ba0; font-size: 1.1em; font-weight: 800; position: absolute; z-index: 5; transition: opacity 0.3s ease; }
         .question-item.active .question-text { opacity: 0; pointer-events: none; }
 
@@ -362,10 +288,10 @@
             <h2 class="birthday-title stagger-2">🎉 Happy Birthday Kocheeeeee! 🎉</h2>
             <div class="countdown-container stagger-3">
                 <div class="countdown-timer" id="countdown">
-                    <div class="time-box animate-float"><div class="time-number" id="days">00</div><div class="time-label">Days</div></div>
-                    <div class="time-box animate-float"><div class="time-number" id="hours">00</div><div class="time-label">Hours</div></div>
-                    <div class="time-box animate-float"><div class="time-number" id="minutes">00</div><div class="time-label">Minutes</div></div>
-                    <div class="time-box animate-float"><div class="time-number" id="seconds">00</div><div class="time-label">Seconds</div></div>
+                    <div class="time-box"><div class="time-number" id="days">00</div><div class="time-label">Days</div></div>
+                    <div class="time-box"><div class="time-number" id="hours">00</div><div class="time-label">Hours</div></div>
+                    <div class="time-box"><div class="time-number" id="minutes">00</div><div class="time-label">Minutes</div></div>
+                    <div class="time-box"><div class="time-number" id="seconds">00</div><div class="time-label">Seconds</div></div>
                 </div>
             </div>
             <p class="sweet-message stagger-4" id="sweetMessage">I can't wait to meet you ..ninne kanan yaan varum!</p>
@@ -481,7 +407,7 @@
                                 width="100%" 
                                 height="315" 
                                 style="max-width: 600px; border-radius: 15px; margin-top: 15px; box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);" 
-                                src="https://www.youtube.com/embed/mSUJPBYQZ0g" 
+                                src="https://www.youtube.com/watch?v=mSUJPBYQZ0g" 
                                 title="YouTube video player" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -535,19 +461,12 @@
         // --- COUNTDOWN TIMER ---
         const birthdayDate = new Date('December 11, 2025 00:00:00').getTime();
 
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-        const countdownEl = document.getElementById('countdown');
-
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = birthdayDate - now;
             
-            if (distance <= 0) {
-                countdownEl.innerHTML = '<div class="time-box" style="min-width: 100%; background: linear-gradient(135deg, #21D4FD 0%, #2152FF 100%); color: white; box-shadow: none;"><div class="time-number" style="color: white;">🎉 It\'s Your Birthday! 🎉</div></div>';
-                clearInterval(countdownInterval);
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<div class="time-box" style="min-width: 100%; background: linear-gradient(135deg, #21D4FD 0%, #2152FF 100%); color: white; box-shadow: none;"><div class="time-number" style="color: white;">🎉 It\'s Your Birthday! 🎉</div></div>';
                 return;
             }
 
@@ -556,37 +475,138 @@
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            daysEl.textContent = String(days).padStart(2, '0');
-            hoursEl.textContent = String(hours).padStart(2, '0');
-            minutesEl.textContent = String(minutes).padStart(2, '0');
-            secondsEl.textContent = String(seconds).padStart(2, '0');
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // --- BUTTON HANDLER ---
+        let clickCount = 0;
+        document.getElementById('pressButton').addEventListener('click', function() {
+            clickCount++;
+            const button = document.getElementById('pressButton');
+            
+            if (clickCount === 1) {
+                document.getElementById('sweetMessage').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('sweetMessage').style.display = 'none';
+                    const warning = document.getElementById('warningMessage');
+                    warning.style.display = 'block';
+                    warning.style.animation = 'none';
+                    if (window.innerWidth > 600) {
+                        warning.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
+                    }
+                    button.textContent = 'Press me Once More 👉👈';
+                    button.style.animation = 'none';
+                }, 300);
+            } else {
+                transitionToPage('welcomePage', 'riddlePage');
+            }
+        });
+
+        // --- PAGE NAVIGATION HELPERS ---
+        function transitionToPage(currentId, nextId) {
+            const currentPage = document.getElementById(currentId);
+            const nextPage = document.getElementById(nextId);
+            
+            currentPage.style.opacity = '0';
+            currentPage.style.transform = 'translateY(-20px)';
+            currentPage.style.transition = 'all 0.5s var(--smooth-ease)';
+
+            setTimeout(() => {
+                currentPage.style.display = 'none';
+                currentPage.style.opacity = '';
+                currentPage.style.transform = '';
+                nextPage.style.display = 'block';
+            }, 500);
         }
 
-        // start the countdown
-        updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
+        // --- RIDDLE 1 ---
+        const correctAnswer = "stethoscope";
 
-        // --- PRESS BUTTON LOGIC (TIMER PAGE -> RIDDLE PAGE) ---
-        const pressButton = document.getElementById('pressButton');
-        const sweetMessage = document.getElementById('sweetMessage');
-        const warningMessage = document.getElementById('warningMessage');
-        const welcomePage = document.getElementById('welcomePage');
-        const riddlePage = document.getElementById('riddlePage');
-
-        let warningShownOnce = false;
-
-        pressButton.addEventListener('click', () => {
-            if (!warningShownOnce) {
-                // First click – just show the funny warning
-                warningMessage.style.display = 'block';
-                sweetMessage.style.opacity = '0.4';
-                warningShownOnce = true;
+        document.getElementById('submitAnswer').addEventListener('click', function() {
+            const inputField = document.getElementById('answerInput');
+            const userAnswer = inputField.value.trim().toLowerCase();
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (userAnswer === correctAnswer) {
+                transitionToPage('riddlePage', 'videoPage');
             } else {
-                // Second click – go to riddle page
-                welcomePage.style.display = 'none';
-                riddlePage.style.display = 'block';
+                inputField.classList.add('shake');
+                errorMessage.style.display = 'block';
+                if(window.innerWidth > 600) {
+                    errorMessage.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
+                }
+                setTimeout(() => {
+                    inputField.classList.remove('shake');
+                    errorMessage.style.display = 'none';
+                }, 500);
             }
+        });
+
+        document.getElementById('answerInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('submitAnswer').click();
+            }
+        });
+
+        // --- NEXT RIDDLE BUTTON ---
+        document.getElementById('nextRiddleBtn').addEventListener('click', function() {
+            transitionToPage('videoPage', 'riddlePage2');
+        });
+
+        // --- RIDDLE 2 ---
+        document.getElementById('submitRiddle2').addEventListener('click', function() {
+            const inputField = document.getElementById('riddle2Input');
+            const userAnswer = inputField.value.trim().toLowerCase();
+            const error2Message = document.getElementById('error2Message');
+            
+            if (userAnswer === 'oii') {
+                document.body.classList.add('static-mode');
+                transitionToPage('riddlePage2', 'specialCornerPage');
+            } else {
+                inputField.classList.add('shake');
+                error2Message.style.display = 'block';
+                if(window.innerWidth > 600) {
+                    error2Message.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
+                }
+                setTimeout(() => {
+                    inputField.classList.remove('shake');
+                    error2Message.style.display = 'none';
+                }, 500);
+            }
+        });
+
+        document.getElementById('riddle2Input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('submitRiddle2').click();
+            }
+        });
+
+        // --- GO TO MESSAGE BUTTON ---
+        document.getElementById('goToMessageBtn').addEventListener('click', function() {
+            document.body.classList.remove('static-mode');
+            transitionToPage('specialCornerPage', 'messagePage');
+        });
+
+        // --- SPECIAL CORNER CLICK HANDLER ---
+        const questionItems = document.querySelectorAll('.question-item');
+        questionItems.forEach(item => {
+            ['click', 'keypress'].forEach(eventType => {
+                item.addEventListener(eventType, (e) => {
+                    if (eventType === 'keypress' && e.key !== 'Enter') return;
+                    
+                    const isActive = item.classList.contains('active');
+                    questionItems.forEach(other => other.classList.remove('active'));
+                    if (!isActive) item.classList.add('active');
+                });
+            });
         });
     </script>
 </body>
 </html>
+
