@@ -323,7 +323,7 @@
                     allowfullscreen>
                 </iframe>
             </div>
-            <button class="submit-btn stagger-3" id="nextRiddleBtn" style="display: inline-block; margin-top: 20px;">Continue for more surprise 🎉</button>
+            <button class="submit-btn stagger-3" id="nextRiddleBtn" style="display: none; margin-top: 20px;">Continue for more surprise 🎉</button>
         </div>
 
         <div class="riddle-page-2" id="riddlePage2">
@@ -509,6 +509,15 @@
             
             if (userAnswer === correctAnswer) {
                 transitionToPage('riddlePage', 'videoPage');
+                
+                // Show button after 3 minutes (180 seconds) - approximate video length
+                setTimeout(() => {
+                    const nextBtn = document.getElementById('nextRiddleBtn');
+                    nextBtn.style.display = 'inline-block';
+                    if (window.innerWidth > 600) {
+                        nextBtn.style.animation = 'fadeInUp 0.8s var(--smooth-ease) forwards';
+                    }
+                }, 180000); // 3 minutes in milliseconds
             } else {
                 inputField.classList.add('shake');
                 errorMessage.style.display = 'block';
