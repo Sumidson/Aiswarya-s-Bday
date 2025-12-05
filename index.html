@@ -535,10 +535,58 @@
         // --- COUNTDOWN TIMER ---
         const birthdayDate = new Date('December 11, 2025 00:00:00').getTime();
 
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const countdownEl = document.getElementById('countdown');
+
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = birthdayDate - now;
             
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<div class="time-box" style="min-width: 100%; background: linear-gradient(135deg, #21D4FD 0%, #2152FF 100%); color: white; box-shadow: none;"><div class="time-number" style="color: white;">🎉 It\'s Your Birthday! 🎉</div></div>';
+            if (distance <= 0) {
+                countdownEl.innerHTML = '<div class="time-box" style="min-width: 100%; background: linear-gradient(135deg, #21D4FD 0%, #2152FF 100%); color: white; box-shadow: none;"><div class="time-number" style="color: white;">🎉 It\'s Your Birthday! 🎉</div></div>';
+                clearInterval(countdownInterval);
                 return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            daysEl.textContent = String(days).padStart(2, '0');
+            hoursEl.textContent = String(hours).padStart(2, '0');
+            minutesEl.textContent = String(minutes).padStart(2, '0');
+            secondsEl.textContent = String(seconds).padStart(2, '0');
+        }
+
+        // start the countdown
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // --- PRESS BUTTON LOGIC (TIMER PAGE -> RIDDLE PAGE) ---
+        const pressButton = document.getElementById('pressButton');
+        const sweetMessage = document.getElementById('sweetMessage');
+        const warningMessage = document.getElementById('warningMessage');
+        const welcomePage = document.getElementById('welcomePage');
+        const riddlePage = document.getElementById('riddlePage');
+
+        let warningShownOnce = false;
+
+        pressButton.addEventListener('click', () => {
+            if (!warningShownOnce) {
+                // First click – just show the funny warning
+                warningMessage.style.display = 'block';
+                sweetMessage.style.opacity = '0.4';
+                warningShownOnce = true;
+            } else {
+                // Second click – go to riddle page
+                welcomePage.style.display = 'none';
+                riddlePage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
