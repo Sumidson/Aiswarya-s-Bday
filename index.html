@@ -177,13 +177,13 @@
             padding: 15px; 
             min-width: 80px; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            animation: boxFloat 3s ease-in-out infinite;
         }
         
-        .time-box:nth-child(1) { animation-delay: 0s; }
-        .time-box:nth-child(2) { animation-delay: 0.2s; }
-        .time-box:nth-child(3) { animation-delay: 0.4s; }
-        .time-box:nth-child(4) { animation-delay: 0.6s; }
+        .time-box.animate-float { animation: boxFloat 3s ease-in-out infinite; }
+        .time-box.animate-float:nth-child(1) { animation-delay: 0s; }
+        .time-box.animate-float:nth-child(2) { animation-delay: 0.2s; }
+        .time-box.animate-float:nth-child(3) { animation-delay: 0.4s; }
+        .time-box.animate-float:nth-child(4) { animation-delay: 0.6s; }
         
         @keyframes boxFloat {
             0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -218,12 +218,23 @@
             cursor: pointer;
             font-weight: 700;
             box-shadow: 0 8px 20px rgba(33, 82, 255, 0.3);
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             position: relative;
             display: inline-block;
         }
-        .press-button:active, .submit-btn:active { transform: scale(0.95); }
-        .press-button { padding: 20px 50px; font-size: 1.3em; margin-top: 20px; animation: pulse 2s infinite; }
+        .press-button:hover, .submit-btn:hover, .riddle-2-submit:hover, .special-corner-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(33, 82, 255, 0.4);
+        }
+        .press-button:active, .submit-btn:active, .riddle-2-submit:active, .special-corner-button:active { 
+            transform: scale(0.95); 
+        }
+        .press-button { 
+            padding: 20px 50px; 
+            font-size: 1.3em; 
+            margin-top: 20px; 
+            animation: pulse 2s infinite; 
+        }
         
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -351,10 +362,10 @@
             <h2 class="birthday-title stagger-2">🎉 Happy Birthday Kocheeeeee! 🎉</h2>
             <div class="countdown-container stagger-3">
                 <div class="countdown-timer" id="countdown">
-                    <div class="time-box"><div class="time-number" id="days">00</div><div class="time-label">Days</div></div>
-                    <div class="time-box"><div class="time-number" id="hours">00</div><div class="time-label">Hours</div></div>
-                    <div class="time-box"><div class="time-number" id="minutes">00</div><div class="time-label">Minutes</div></div>
-                    <div class="time-box"><div class="time-number" id="seconds">00</div><div class="time-label">Seconds</div></div>
+                    <div class="time-box animate-float"><div class="time-number" id="days">00</div><div class="time-label">Days</div></div>
+                    <div class="time-box animate-float"><div class="time-number" id="hours">00</div><div class="time-label">Hours</div></div>
+                    <div class="time-box animate-float"><div class="time-number" id="minutes">00</div><div class="time-label">Minutes</div></div>
+                    <div class="time-box animate-float"><div class="time-number" id="seconds">00</div><div class="time-label">Seconds</div></div>
                 </div>
             </div>
             <p class="sweet-message stagger-4" id="sweetMessage">I can't wait to meet you ..ninne kanan yaan varum!</p>
