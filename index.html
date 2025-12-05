@@ -43,7 +43,7 @@
             display: none !important;
         }
 
-        /* --- NEW ANIMATIONS --- */
+        /* --- ANIMATIONS --- */
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -135,11 +135,9 @@
             text-align: center;
             position: relative;
             z-index: 10;
-            /* Added Floating Animation */
             animation: floatContainer 6s ease-in-out infinite;
         }
 
-        /* Stop float on small screens to prevent cut-off */
         @media (max-width: 600px) {
             .container { animation: none; }
         }
@@ -181,7 +179,6 @@
             font-size: 2em; 
             font-weight: 800; 
             margin: 20px 0;
-            /* Shimmer Effect added */
             background: linear-gradient(to right, #01579B 0%, #21D4FD 50%, #01579B 100%);
             background-size: 200% auto;
             color: #000;
@@ -648,18 +645,17 @@
                 currentPage.style.display = 'none';
                 nextPage.style.display = 'block';
                 
-                // Re-trigger animations for the new page
-                // This ensures specific page elements animate in when the page is shown
+                // Re-trigger animations
                 const animatedElements = nextPage.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5');
                 animatedElements.forEach(el => {
                     el.style.animation = 'none';
-                    el.offsetHeight; /* trigger reflow */
+                    el.offsetHeight; 
                     el.style.animation = null; 
                 });
 
-                // Trigger Confetti if entering Message Page
+                // Trigger Confetti indefinitely if entering Message Page
                 if (nextId === 'messagePage') {
-                    startConfetti();
+                    startConfetti(); 
                 }
 
             }, 500);
@@ -674,6 +670,8 @@
             const errorMessage = document.getElementById('errorMessage');
             
             if (userAnswer === correctAnswer) {
+                // *** TRIGGER CONFETTI FOR 2 SECONDS ***
+                startConfetti(2000);
                 transitionToPage('riddlePage', 'videoPage');
             } else {
                 inputField.classList.add('shake');
@@ -739,12 +737,17 @@
         });
 
         // --- CONFETTI ANIMATION ---
-        function startConfetti() {
+        let confettiAnimationFrame;
+
+        function startConfetti(duration) {
             const canvas = document.getElementById('confetti-canvas');
             canvas.style.display = 'block';
             const ctx = canvas.getContext('2d');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+
+            // Clear previous loops if any
+            if (confettiAnimationFrame) cancelAnimationFrame(confettiAnimationFrame);
 
             const confettiPieces = [];
             const colors = ['#21D4FD', '#2152FF', '#00b4db', '#FFD700', '#FF69B4'];
@@ -780,11 +783,20 @@
                         confettiPieces[index].y = -10;
                     }
                 });
-                requestAnimationFrame(drawConfetti);
+                confettiAnimationFrame = requestAnimationFrame(drawConfetti);
             }
 
             createConfetti();
             drawConfetti();
+
+            // Check if duration is provided (for the 2-second burst)
+            if (duration) {
+                setTimeout(() => {
+                    cancelAnimationFrame(confettiAnimationFrame);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    canvas.style.display = 'none';
+                }, duration);
+            }
         }
     </script>
 
