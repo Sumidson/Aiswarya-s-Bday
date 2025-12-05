@@ -90,10 +90,12 @@
             z-index: 2;
             animation: sway 5s ease-in-out infinite alternate;
         }
+
         @keyframes sway {
             0% { transform: rotate(-5deg); }
             100% { transform: rotate(5deg); }
         }
+
         .top-left { top: 15px; left: 15px; }
         .top-right { top: 15px; right: 15px; }
 
@@ -141,12 +143,12 @@
 
         .birthday-banner h1 { font-size: 1.6em; font-weight: 800; margin: 0; }
         .birthday-title { color: #01579B; font-size: 2em; font-weight: 800; margin: 20px 0; }
-        
+
         .countdown-timer { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
         .time-box { background: #F0F8FF; border-radius: 15px; padding: 15px; min-width: 80px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .time-number { font-size: 1.8em; font-weight: 800; color: #0288D1; }
         .time-label { font-size: 0.8em; color: #01579B; font-weight: 600; margin-top: 5px; }
-        
+
         .sweet-message { 
             font-size: 1.2em; 
             color: #444; 
@@ -154,6 +156,7 @@
             font-style: italic;
             transition: opacity 0.3s ease;
         }
+
         .warning-message { 
             display: none; 
             font-size: 1.2em; 
@@ -178,13 +181,13 @@
         }
         .press-button:active, .submit-btn:active { transform: scale(0.95); }
         .press-button { padding: 20px 50px; font-size: 1.3em; margin-top: 20px; animation: pulse 2s infinite; }
-        
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-        
+
         .page-title { color: #01579B; margin-bottom: 20px; font-size: 2.2em; font-weight: 800; }
         .riddle-text { font-size: 1.4em; color: #333; margin-bottom: 30px; line-height: 1.5; font-weight: 500; }
 
@@ -194,15 +197,17 @@
             border-radius: 15px; margin: 25px 0; text-align: center; 
             background: #F0F8FF; 
         }
-        .answer-input:focus, .riddle-2-input:focus { background: white; border-color: #21D4FD; outline: none; }
 
         .shake { animation: shake 0.4s both; border-color: #FF5722 !important; background: #fff5f5; }
+
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
         .error-message { color: #D32F2F; margin-top: 15px; display: none; font-weight: 700; font-size: 1.1em; }
 
         .top-message { color: #01579B; font-size: 1.5em; margin-bottom: 30px; font-weight: 800; line-height: 1.4; }
+
         .special-corner-button { width: 100%; display: block; margin: 0 auto 30px auto; max-width: 500px;}
-        
+
         .questions-container {
             background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
@@ -224,7 +229,9 @@
         }
 
         .question-item.active { flex: 12; background: linear-gradient(135deg, #EBF7FF 0%, #C3E3FD 100%); border-radius: 18px; }
+
         .question-text { color: #004ba0; font-size: 1.1em; font-weight: 800; position: absolute; z-index: 5; transition: opacity 0.3s ease; }
+
         .question-item.active .question-text { opacity: 0; pointer-events: none; }
 
         .hover-content {
@@ -237,11 +244,15 @@
             width: 100%; height: 100%; overflow-y: auto;
             pointer-events: none;
         }
+
         .question-item.active .hover-content { opacity: 1; pointer-events: auto; }
 
         video { width: 100%; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3); }
+
         .message-text { padding: 30px; background: #E3F2FD; border-radius: 20px; border-left: 8px solid #21D4FD; font-size: 1.3em; line-height: 1.6; color: #003c8f; }
+
         .hearts { text-align: center; font-size: 3em; margin-top: 30px; animation: heartbeat 2s infinite ease-in-out; color: #21D4FD; }
+
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
         @media (max-width: 600px) {
@@ -264,15 +275,17 @@
             .questions-container { height: auto; background: transparent; }
             .question-item { min-height: 70px; flex: none; width: 100%; margin-bottom: 10px; }
             .question-item.active { height: auto; min-height: 300px; flex: none; }
-            
+
             .hover-content { position: relative; opacity: 0; display: none; height: auto; }
             .question-item.active .hover-content { display: block; opacity: 1; }
             .question-item.active .question-text { display: none; }
             .question-text { position: relative; }
         }
+
     </style>
 </head>
 <body>
+
     <ul class="bg-bubbles">
         <li></li><li></li><li></li><li></li><li></li><li></li>
     </ul>
@@ -281,11 +294,15 @@
     <div class="corner-decor top-right">💙🎁🎉🎈</div>
 
     <div class="container">
+
+        <!-- WELCOME PAGE -->
         <div class="welcome-page" id="welcomePage">
             <div class="birthday-banner stagger-1">
                 <h1>Time Left For Dr Cringemol's de 20th Birthday!</h1>
             </div>
+
             <h2 class="birthday-title stagger-2">🎉 Happy Birthday Kocheeeeee! 🎉</h2>
+
             <div class="countdown-container stagger-3">
                 <div class="countdown-timer" id="countdown">
                     <div class="time-box"><div class="time-number" id="days">00</div><div class="time-label">Days</div></div>
@@ -294,22 +311,31 @@
                     <div class="time-box"><div class="time-number" id="seconds">00</div><div class="time-label">Seconds</div></div>
                 </div>
             </div>
+
             <p class="sweet-message stagger-4" id="sweetMessage">I can't wait to meet you ..ninne kanan yaan varum!</p>
+
             <button class="press-button stagger-5" id="pressButton"> Press Me Kochee </button>
+
             <p class="warning-message" id="warningMessage">Ayye... onnum illa chumma parjatha!! 😜</p>
         </div>
 
+        <!-- RIDDLE 1 -->
         <div class="riddle-page" id="riddlePage">
             <h1 class="page-title stagger-1">✨ Solve This ✨</h1>
+
             <p class="riddle-text stagger-2">Yaan aayicha letter vaich para</p>
+
             <input type="text" class="answer-input stagger-3" id="answerInput" placeholder="Enter your answer...">
-            <br>
+
             <button class="submit-btn stagger-4" id="submitAnswer">Submit Answer</button>
+
             <p class="error-message" id="errorMessage">Sheyyy ith enge theticchu.. pinyeum aloyikii . 💭</p>
         </div>
 
+        <!-- VIDEO PAGE -->
         <div class="video-page" id="videoPage">
             <h1 class="page-title stagger-1">🎉 You Got It! 🎉</h1>
+
             <div class="stagger-2">
                 <iframe
                     id="surpriseVideo"
@@ -323,115 +349,139 @@
                     allowfullscreen>
                 </iframe>
             </div>
+
             <button class="submit-btn stagger-3" id="nextRiddleBtn" style="display: none; margin-top: 20px;">Continue for more surprise 🎉</button>
         </div>
 
+        <!-- RIDDLE 2 -->
         <div class="riddle-page-2" id="riddlePage2">
             <h1 class="page-title stagger-1">🎊 One More Challenge! 🎊</h1>
+
             <p class="riddle-text stagger-2">The first text you sent me on WhatsApp(And check cheyan padilla )</p>
+
             <input type="text" class="riddle-2-input stagger-3" id="riddle2Input" placeholder="Enter your answer...">
-            <br>
+
             <button class="riddle-2-submit stagger-4" id="submitRiddle2">Submit Answer</button>
+
             <p class="error-message" id="error2Message">Sheyyy ith enge thetuchu.. pinyeum aloyikii . 💭</p>
         </div>
 
+        <!-- SPECIAL CORNER -->
         <div class="special-corner-page" id="specialCornerPage">
-            <div class="special-container">
-                <h1 class="top-message stagger-1">🎉 Vaa Kochee Yaan ninde wait chyeuaayirinu ..Enke ariyam nee video kand bore aayiyarikum but korch koodi undu... PLSSSSS nokuoo !! 🎉</h1>
-                
-                <button class="special-corner-button stagger-2" id="goToMessageBtn">SPECIAL CORNER FOR AISWARYA<br><span>(Enum Click cheyedi but last le after reading below )</span></button>
-                
-                <div class="questions-container stagger-3">
-                    <div class="question-item" tabindex="0">
-                        <span class="question-text">Enne Vaiki Pleaseee</span>
-                        <div class="hover-content">
-                            <p>Heyy AISWARYA,</p>
-                            <p>It's been just over 4 months since we first met technically more than 2 years , but nokk namal etre nalla memories aanu undakiye. Remember how we first met? And first late night talks ?</p>
-                        </div>
-                    </div>
-                    
-                    <div class="question-item" tabindex="0">
-                        <span class="question-text">Enne Vaikulle?😭</span>
-                        <div class="hover-content">
-                            <p>Aa divasam namal Gaur city mall poyide I knew ki namalde koot otari naalad aanu. You made me feel very very good and appam thoth ippam vere you always make me feel good. I am grateful I have you. And the memories namal undakune athum otari nalla aanu. And I cherish them every single day.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="question-item" tabindex="0">
-                        <span class="question-text">Ith nokk</span>
-                        <div class="hover-content">
-                            <p>You are kind , caring , sweet , kiddish , intelligent , talented . great dancer and singer , comedy person ,AND GREAT FRIEND AND WILL BE THE BEST FUTURE DOCTOR</p>
-                        </div>
-                    </div>
-                    
-                    <div class="question-item" tabindex="0">
-                        <span class="question-text">Korch Slow Vaikii<br>Eth aloyich erudan time edutu</span>
-                        <div class="hover-content">
-                            <p>you are an amazing amazing amazing fantastic fantabulous cute beautiful ,HOT(Enke martram aryiyullu 😜😉😉)incredible awesome stunning dazzling miraculous marvelous extraordinary phenomenal spectacular unbelievable person</p>
-                        </div>
-                    </div>
-                    
-                    <div class="question-item" tabindex="0">
-                        <span class="question-text">Sheyy enth parajalum kelkula</span>
-                        <div class="hover-content">
-                            <p>Again, you are an amazing human being Aiswarya.. Wishing you a very very HAPPY BIRTHDAY!!.. i wish I could do could always fix all  the problems of  your life ..but ende ne etre aavum atre Ill do it for you I never regretted doing anything for you and I never will..</p>
-                        </div>
-                    </div>
-                    
-                    <div class="question-item" tabindex="0">
-                        <span class="question-text">Oiii</span>
-                        <div class="hover-content">
-                            <p>Enjoy your life kocheeeeee ....And always Remember YAAN UNDU NINK NEE OTAK ALLA AND ENTHUM UNDAYALUM... CALL 9761987576 .. 24X7 AVAILABLE (This service is only available to you)</p>
-                        </div>
-                    </div>
 
-                    <div class="question-item" tabindex="0">
-                        <span class="question-text">Just oru request</span>
-                        <div class="hover-content">
-                            <p>Edee i miss the old time nee eppam viltil aayirinu.. namal aa hours of video call , random talks that we dont Remember ki namal entha samsarikune , mute video calls achan ille amma vannu parjete otadi ki call cut chyedune , moive kanne,(Nink ariyulla ki movie parjete yaan ninne aanu kanunne allate movie alla yaan movie minimise chyede ninde vc aanu full screen chyeune) and namal ratri thodagune call ravile 6 am vere olla ...video call le orgi povune .. Ith ellam yaan sherikum miss chyeune , edi i know samayam kituniila nink.. but kabhi ith possible aane namak pinnum old days pole chyeanamn.. I would never forget that time till my last breath ()</p>
-                        </div>
-                    </div>
-                      
-                    <div class="question-item" tabindex="0">
-                        <span class="question-text">SPECIAL GIFT</span>
-                        <div class="hover-content">
-                            <p>ENTH... Endenee ee paravisham ethnnu koodadal expect cheydeee.. first time aanu yaan igne chyeunee... next time ithum better cheyammmmmm Pinne WISHING YOU A BOMBASTIC 20TH BIRTHDAY Enjoy cheyanam AND I AM THERE FOR YOU ALWAYS OKAY!! AND I AM ALWAYS PROUD OF YOU THAT YOU ARE MY BESTEST FRIEND AND I ALWAYS WILL BE !!!</p>
-                        </div>
-                    </div>
+            <h1 class="top-message stagger-1">🎉 Vaa Kochee Yaan ninde wait chyeuaayirinu ..Enke ariyam nee video kand bore aayiyarikum but korch koodi undu... PLSSSSS nokuoo !! 🎉</h1>
+            
+            <button class="special-corner-button stagger-2" id="goToMessageBtn">SPECIAL CORNER FOR AISWARYA<br><span>(Enum Click cheyedi but last le after reading below )</span></button>
 
-                    <div class="question-item" tabindex="0">
-                        <span class="question-text">Orma Undo ith </span>
-                        <div class="hover-content">
-                            <p>We knew each other but didnt know that we are gonna be this close and important person of our life  </p>
-                           <iframe> 
-    width="100%" 
-    height="315" 
-    style="max-width: 600px; border-radius: 15px; margin-top: 15px; box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);" 
-    src="https://www.youtube.com/embed/mSUJPBYQZ0g"
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-</iframe>
+            <div class="questions-container stagger-3">
 
-                        </div>
+                <!-- 1 -->
+                <div class="question-item" tabindex="0">
+                    <span class="question-text">Enne Vaiki Pleaseee</span>
+                    <div class="hover-content">
+                        <p>Heyy AISWARYA,</p>
+                        <p>It's been just over 4 months since we first met technically more than 2 years , but nokk namal etre nalla memories aanu undakiye. Remember how we first met? And first late night talks ?</p>
                     </div>
                 </div>
+
+                <!-- 2 -->
+                <div class="question-item" tabindex="0">
+                    <span class="question-text">Enne Vaikulle?😭</span>
+                    <div class="hover-content">
+                        <p>Aa divasam namal Gaur city mall poyide I knew ki namalde koot otari naalad aanu. You made me feel very very good and appam thoth ippam vere you always make me feel good. I am grateful I have you.</p>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="question-item" tabindex="0">
+                    <span class="question-text">Ith nokk</span>
+                    <div class="hover-content">
+                        <p>You are kind , caring , sweet , kiddish , intelligent , talented . great dancer and singer , comedy person ,AND GREAT FRIEND AND WILL BE THE BEST FUTURE DOCTOR</p>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="question-item" tabindex="0">
+                    <span class="question-text">Korch Slow Vaikii<br>Eth aloyich erudan time edutu</span>
+                    <div class="hover-content">
+                        <p>you are an amazing amazing amazing fantastic fantabulous cute beautiful ,HOT(Enke martram aryiyullu 😜😉😉)incredible awesome stunning dazzling miraculous marvelous extraordinary phenomenal spectacular unbelievable person</p>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="question-item" tabindex="0">
+                    <span class="question-text">Sheyy enth parajalum kelkula</span>
+                    <div class="hover-content">
+                        <p>Again, you are an amazing human being Aiswarya.. Wishing you a very very HAPPY BIRTHDAY!!.. i wish I could do could always fix all  the problems of  your life ..</p>
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="question-item" tabindex="0">
+                    <span class="question-text">Oiii</span>
+                    <div class="hover-content">
+                        <p>Enjoy your life kocheeeeee ....And always Remember YAAN UNDU NINK NEE OTAK ALLA AND ENTHUM UNDAYALUM... CALL 9761987576 .. 24X7 AVAILABLE (This service is only available to you)</p>
+                    </div>
+                </div>
+
+                <!-- 7 -->
+                <div class="question-item" tabindex="0">
+                    <span class="question-text">Just oru request</span>
+                    <div class="hover-content">
+                        <p>Edee i miss the old time nee eppam viltil aayirinu.. namal aa hours of video call , random talks that we dont remember ..</p>
+                    </div>
+                </div>
+
+                <!-- 8 -->
+                <div class="question-item" tabindex="0">
+                    <span class="question-text">SPECIAL GIFT</span>
+                    <div class="hover-content">
+                        <p>ENTH... Endenee ee paravisham ethnnu koodadal expect cheydeee.. first time aanu yaan igne chyeunee... next time ithum better cheyammmmmm</p>
+                    </div>
+                </div>
+
+                <!-- 9 (has video) -->
+                <div class="question-item" tabindex="0">
+                    <span class="question-text">Orma Undo ith</span>
+                    <div class="hover-content">
+                        <p>We knew each other but didnt know that we are gonna be this close and important person of our life</p>
+
+                        <!-- FIXED VIDEO -->
+                        <iframe 
+                            width="100%" 
+                            height="315" 
+                            style="max-width: 600px; border-radius: 15px; margin-top: 15px; box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);" 
+                            src="https://www.youtube.com/embed/mSUJPBYQZ0g" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+                </div>
+
             </div>
         </div>
 
+        <!-- MESSAGE PAGE -->
         <div class="message-page" id="messagePage">
+
             <h1 class="page-title stagger-1">💝 A Message For You 💝</h1>
+
             <div class="message-text stagger-2">
                 <p>Dear Aiswarya,</p>
                 <p style="margin-top: 15px;">Thank you for being the most amazing friend anyone could ask for. Your smile brightens my darkest days, and your laughter is music to my ears.</p>
                 <p style="margin-top: 15px;">Here's to many more memories together! 🌟</p>
                 <p style="margin-top: 15px;">Love always,<br>Your Chichu❤️</p>
             </div>
+
             <div class="hearts stagger-3">💙 ✨ 🌟 💙</div>
         </div>
+
     </div>
 
+    <!-- SCRIPTS -->
     <script>
         // --- YOUTUBE API ---
         var tag = document.createElement('script');
@@ -449,7 +499,6 @@
         }
 
         function onPlayerStateChange(event) {
-            // YT.PlayerState.ENDED = 0
             if (event.data == YT.PlayerState.ENDED) {
                 const nextBtn = document.getElementById('nextRiddleBtn');
                 nextBtn.style.display = 'inline-block';
@@ -497,7 +546,6 @@
                     document.getElementById('sweetMessage').style.display = 'none';
                     const warning = document.getElementById('warningMessage');
                     warning.style.display = 'block';
-                    warning.style.animation = 'none';
                     if (window.innerWidth > 600) {
                         warning.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
                     }
@@ -520,8 +568,6 @@
 
             setTimeout(() => {
                 currentPage.style.display = 'none';
-                currentPage.style.opacity = '';
-                currentPage.style.transform = '';
                 nextPage.style.display = 'block';
             }, 500);
         }
@@ -539,9 +585,6 @@
             } else {
                 inputField.classList.add('shake');
                 errorMessage.style.display = 'block';
-                if(window.innerWidth > 600) {
-                    errorMessage.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
-                }
                 setTimeout(() => {
                     inputField.classList.remove('shake');
                     errorMessage.style.display = 'none';
@@ -572,9 +615,6 @@
             } else {
                 inputField.classList.add('shake');
                 error2Message.style.display = 'block';
-                if(window.innerWidth > 600) {
-                    error2Message.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
-                }
                 setTimeout(() => {
                     inputField.classList.remove('shake');
                     error2Message.style.display = 'none';
@@ -596,20 +636,15 @@
 
         // --- SPECIAL CORNER CLICK HANDLER ---
         const questionItems = document.querySelectorAll('.question-item');
+
         questionItems.forEach(item => {
-            ['click', 'keypress'].forEach(eventType => {
-                item.addEventListener(eventType, (e) => {
-                    if (eventType === 'keypress' && e.key !== 'Enter') return;
-                    
-                    const isActive = item.classList.contains('active');
-                    questionItems.forEach(other => other.classList.remove('active'));
-                    if (!isActive) item.classList.add('active');
-                });
+            item.addEventListener('click', function() {
+                const isActive = item.classList.contains('active');
+                questionItems.forEach(other => other.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
             });
         });
     </script>
+
 </body>
 </html>
-
-
-
