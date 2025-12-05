@@ -137,13 +137,59 @@
             border-radius: 20px;
             margin-bottom: 25px;
             box-shadow: 0 10px 20px rgba(33, 212, 253, 0.3);
+            animation: bannerGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes bannerGlow {
+            0% { box-shadow: 0 10px 20px rgba(33, 212, 253, 0.3); }
+            100% { box-shadow: 0 15px 40px rgba(33, 212, 253, 0.6), 0 0 30px rgba(33, 212, 253, 0.4); }
         }
 
-        .birthday-banner h1 { font-size: 1.6em; font-weight: 800; margin: 0; }
-        .birthday-title { color: #01579B; font-size: 2em; font-weight: 800; margin: 20px 0; }
+        .birthday-banner h1 { 
+            font-size: 1.6em; 
+            font-weight: 800; 
+            margin: 0;
+            animation: textShimmer 2s ease-in-out infinite;
+        }
+        
+        @keyframes textShimmer {
+            0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+            50% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.6); }
+        }
+        
+        .birthday-title { 
+            color: #01579B; 
+            font-size: 2em; 
+            font-weight: 800; 
+            margin: 20px 0;
+            animation: titleBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
         
         .countdown-timer { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-        .time-box { background: #F0F8FF; border-radius: 15px; padding: 15px; min-width: 80px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .time-box { 
+            background: #F0F8FF; 
+            border-radius: 15px; 
+            padding: 15px; 
+            min-width: 80px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            animation: boxFloat 3s ease-in-out infinite;
+        }
+        
+        .time-box:nth-child(1) { animation-delay: 0s; }
+        .time-box:nth-child(2) { animation-delay: 0.2s; }
+        .time-box:nth-child(3) { animation-delay: 0.4s; }
+        .time-box:nth-child(4) { animation-delay: 0.6s; }
+        
+        @keyframes boxFloat {
+            0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+            50% { transform: translateY(-8px) scale(1.05); box-shadow: 0 8px 20px rgba(33, 212, 253, 0.3); }
+        }
+        
         .time-number { font-size: 1.8em; font-weight: 800; color: #0288D1; }
         .time-label { font-size: 0.8em; color: #01579B; font-weight: 600; margin-top: 5px; }
         
@@ -220,10 +266,27 @@
             cursor: pointer;
             position: relative; overflow: hidden;
             flex: 1; display: flex; justify-content: center; align-items: center;
-            transition: flex 0.5s var(--smooth-ease);
+            transition: flex 0.5s var(--smooth-ease), transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .question-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(33, 212, 253, 0.4);
         }
 
-        .question-item.active { flex: 12; background: linear-gradient(135deg, #EBF7FF 0%, #C3E3FD 100%); border-radius: 18px; }
+        .question-item.active { 
+            flex: 12; 
+            background: linear-gradient(135deg, #EBF7FF 0%, #C3E3FD 100%); 
+            border-radius: 18px;
+            animation: expandPulse 0.5s ease-out;
+        }
+        
+        @keyframes expandPulse {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
         .question-text { color: #004ba0; font-size: 1.1em; font-weight: 800; position: absolute; z-index: 5; transition: opacity 0.3s ease; }
         .question-item.active .question-text { opacity: 0; pointer-events: none; }
 
@@ -407,7 +470,7 @@
                                 width="100%" 
                                 height="315" 
                                 style="max-width: 600px; border-radius: 15px; margin-top: 15px; box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);" 
-                                src="https://www.youtube.com/embed/mSUJBPYQZ0g?rel=0" 
+                                src="https://www.youtube.com/embed/mSUJPBYQZ0g" 
                                 title="YouTube video player" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -468,144 +531,3 @@
             if (distance < 0) {
                 document.getElementById('countdown').innerHTML = '<div class="time-box" style="min-width: 100%; background: linear-gradient(135deg, #21D4FD 0%, #2152FF 100%); color: white; box-shadow: none;"><div class="time-number" style="color: white;">🎉 It\'s Your Birthday! 🎉</div></div>';
                 return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-        
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
-        // --- BUTTON HANDLER ---
-        let clickCount = 0;
-        document.getElementById('pressButton').addEventListener('click', function() {
-            clickCount++;
-            const button = document.getElementById('pressButton');
-            
-            if (clickCount === 1) {
-                document.getElementById('sweetMessage').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('sweetMessage').style.display = 'none';
-                    const warning = document.getElementById('warningMessage');
-                    warning.style.display = 'block';
-                    warning.style.animation = 'none';
-                    if (window.innerWidth > 600) {
-                        warning.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
-                    }
-                    button.textContent = 'Press me Once More 👉👈';
-                    button.style.animation = 'none';
-                }, 300);
-            } else {
-                transitionToPage('welcomePage', 'riddlePage');
-            }
-        });
-
-        // --- PAGE NAVIGATION HELPERS ---
-        function transitionToPage(currentId, nextId) {
-            const currentPage = document.getElementById(currentId);
-            const nextPage = document.getElementById(nextId);
-            
-            currentPage.style.opacity = '0';
-            currentPage.style.transform = 'translateY(-20px)';
-            currentPage.style.transition = 'all 0.5s var(--smooth-ease)';
-
-            setTimeout(() => {
-                currentPage.style.display = 'none';
-                currentPage.style.opacity = '';
-                currentPage.style.transform = '';
-                nextPage.style.display = 'block';
-            }, 500);
-        }
-
-        // --- RIDDLE 1 ---
-        const correctAnswer = "stethoscope";
-
-        document.getElementById('submitAnswer').addEventListener('click', function() {
-            const inputField = document.getElementById('answerInput');
-            const userAnswer = inputField.value.trim().toLowerCase();
-            const errorMessage = document.getElementById('errorMessage');
-            
-            if (userAnswer === correctAnswer) {
-                transitionToPage('riddlePage', 'videoPage');
-            } else {
-                inputField.classList.add('shake');
-                errorMessage.style.display = 'block';
-                if(window.innerWidth > 600) {
-                    errorMessage.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
-                }
-                setTimeout(() => {
-                    inputField.classList.remove('shake');
-                    errorMessage.style.display = 'none';
-                }, 500);
-            }
-        });
-
-        document.getElementById('answerInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('submitAnswer').click();
-            }
-        });
-
-        // --- NEXT RIDDLE BUTTON ---
-        document.getElementById('nextRiddleBtn').addEventListener('click', function() {
-            transitionToPage('videoPage', 'riddlePage2');
-        });
-
-        // --- RIDDLE 2 ---
-        document.getElementById('submitRiddle2').addEventListener('click', function() {
-            const inputField = document.getElementById('riddle2Input');
-            const userAnswer = inputField.value.trim().toLowerCase();
-            const error2Message = document.getElementById('error2Message');
-            
-            if (userAnswer === 'oii') {
-                document.body.classList.add('static-mode');
-                transitionToPage('riddlePage2', 'specialCornerPage');
-            } else {
-                inputField.classList.add('shake');
-                error2Message.style.display = 'block';
-                if(window.innerWidth > 600) {
-                    error2Message.style.animation = 'fadeInUp 0.5s var(--smooth-ease) forwards';
-                }
-                setTimeout(() => {
-                    inputField.classList.remove('shake');
-                    error2Message.style.display = 'none';
-                }, 500);
-            }
-        });
-
-        document.getElementById('riddle2Input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('submitRiddle2').click();
-            }
-        });
-
-        // --- GO TO MESSAGE BUTTON ---
-        document.getElementById('goToMessageBtn').addEventListener('click', function() {
-            document.body.classList.remove('static-mode');
-            transitionToPage('specialCornerPage', 'messagePage');
-        });
-
-        // --- SPECIAL CORNER CLICK HANDLER ---
-        const questionItems = document.querySelectorAll('.question-item');
-        questionItems.forEach(item => {
-            ['click', 'keypress'].forEach(eventType => {
-                item.addEventListener(eventType, (e) => {
-                    if (eventType === 'keypress' && e.key !== 'Enter') return;
-                    
-                    const isActive = item.classList.contains('active');
-                    questionItems.forEach(other => other.classList.remove('active'));
-                    if (!isActive) item.classList.add('active');
-                });
-            });
-        });
-    </script>
-</body>
-</html>
